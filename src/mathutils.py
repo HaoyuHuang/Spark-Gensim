@@ -1,5 +1,7 @@
 __author__ = 'haoyu'
 import math
+from gensim.corpora import TextCorpus, MmCorpus, Dictionary
+from gensim.models import LsiModel
 
 def max(score=[]):
     """calculate the maximum score"""
@@ -10,10 +12,6 @@ def max(score=[]):
             max = score[i];
             index = i;
     return max, index;
-
-def calculate_score(context=[], blanks=[[]]):
-    """calcualte the score given context words and blanks"""
-    pass;
 
 def cossim(vec1=[], vec2=[]):
     """calculate the cosine similarity between two word vectors"""
@@ -30,9 +28,9 @@ def magnitude(vec=[]):
         sum = sum + em * em;
     return math.sqrt(sum);
 
-def combine_and_normalize(vecs=[[]], size=0):
+def combine_and_normalize(vecs=[], size=0):
     """combine and normalize word vectors"""
-    retvec = [0 for i in range(0, size)];
+    retvec = [0.0 for i in range(0, size)];
     for vec in vecs:
         for i in range(0, len(vec)):
             retvec[i] = retvec[i] + vec[i];
@@ -40,6 +38,3 @@ def combine_and_normalize(vecs=[[]], size=0):
     for i in range(0, len(retvec)):
         retvec[i] = retvec[i] / len(vecs);
     return retvec;
-
-vecs = [[1.0,2.0,3.0],[2.0,3.0,4.0]]
-print cossim([1,1,1], [1,2,3])
