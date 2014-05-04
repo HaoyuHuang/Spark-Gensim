@@ -45,4 +45,5 @@ def load_model(wordid_txt_file, tfidf_txt_file, model_file):
     lsi.save(model_file)
     return lsi
 
-pretrain()
+if __name__ == '__main__':
+    pretrain()
