@@ -1,10 +1,9 @@
+from src.lsa import lsamodel, mathutils, eval
+
 __author__ = 'haoyu'
 
-from src import mathutils
 import nltk
 import heapq
-from src import lsamodel
-from src import eval
 
 K_MAX_TOTAL_SIMILARITY = 1;
 TOTAL_SIMILARITY = 2;
