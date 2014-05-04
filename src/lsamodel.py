@@ -1,18 +1,19 @@
 from gensim.corpora import TextCorpus, MmCorpus, Dictionary
 from gensim.models import LsiModel
 
-text_corpus_file = '/Users/apple/graduate/Courses/544NLP/Workspace/Spark/gutenberg/gutenberg.txt'
-dict_file = '/Users/apple/graduate/Courses/544NLP/Workspace/Spark/gutenberg/gutenberg_dic.dic'
-dic_txt_file = '/Users/apple/graduate/Courses/544NLP/Workspace/Spark/gutenberg/gutenberg_dic.txt'
-mm_corpus_file = '/Users/apple/graduate/Courses/544NLP/Workspace/Spark/gutenberg/gutenberg_corpus.mm'
-model_file = '/Users/apple/graduate/Courses/544NLP/Workspace/Spark/gutenberg/gutenberg.model'
+text_corpus_file = '/Users/apple/graduate/Courses/544NLP/Workspace/Spark/gutenberg/gutenberg_7g_lowcase.txt'
+dict_file = '/Users/apple/graduate/Courses/544NLP/Workspace/Spark/gutenberg/gutenberg_7g_lowcase_dic.dic'
+dic_txt_file = '/Users/apple/graduate/Courses/544NLP/Workspace/Spark/gutenberg/gutenberg_7g_lowcase_dic.txt'
+mm_corpus_file = '/Users/apple/graduate/Courses/544NLP/Workspace/Spark/gutenberg/gutenberg_7g_lowcase_corpus.mm'
+model_file = '/Users/apple/graduate/Courses/544NLP/Workspace/Spark/gutenberg/gutenberg_7g_lowcase.model'
 
 def pretrain():
     """pre train the text corpus and build the dictionary"""
     gutenberg_corpus = TextCorpus(text_corpus_file)
     gutenberg_corpus.dictionary.save(dict_file)
     gutenberg_corpus.dictionary.save_as_text(dic_txt_file)
-    MmCorpus.serialize(mm_corpus_file, gutenberg_corpus)
+    mm = MmCorpus.serialize(mm_corpus_file, gutenberg_corpus)
+    print mm;
 
 def train(text_corpus_file, dict_file):
     """train lsi model from text corpus"""
@@ -43,3 +44,5 @@ def load_model(wordid_txt_file, tfidf_txt_file, model_file):
     lsi = LsiModel(corpus=mm, id2word=id2word, num_topics=400)
     lsi.save(model_file)
     return lsi
+
+pretrain()
