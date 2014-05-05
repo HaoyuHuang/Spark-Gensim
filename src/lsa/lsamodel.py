@@ -44,5 +44,5 @@ def load_model(wordid_txt_file, tfidf_txt_file, model_file):
     lsi = LsiModel(corpus=mm, id2word=id2word, num_topics=400)
     lsi.save(model_file)
     return lsi
-
-pretrain()
+if __name__ == "__main__":
+    pretrain()
